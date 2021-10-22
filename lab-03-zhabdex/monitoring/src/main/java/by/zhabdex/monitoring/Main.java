@@ -14,10 +14,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        MappedCollection<Integer, String> collection
-//                = new MappedCollection<>((Integer a) -> "Number is " + a.toString());
-//
+        MappedCollection<Integer, String> collection
+                = new MappedCollection<>((Integer a) -> "Number is " + a.toString());
+
 //        collection.renew(List.of(4, 5, 6, 7));
+        System.out.println(collection.currentState());
 //        collection.currentState().forEach(System.out::println);
 
 //        FilteredCollection<Integer> collection
@@ -55,5 +56,10 @@ public class Main {
 //        collection.renew(fetchServices());
 //        collection.currentState().forEach(service -> System.out.println(service.getNodesCount()));
 
+//        var collection = new FilteredCollection<Integer>(x -> x % 2 == 0)
+//                .compose(new SortedCollection<>((a, b) -> b - a))
+//                .compose(new MappedCollection<>(a -> "This is " + a.toString()));
+//        collection.renew(List.of(4, 5, 6, 7));
+//        System.out.println(collection.currentState());
     }
 }
