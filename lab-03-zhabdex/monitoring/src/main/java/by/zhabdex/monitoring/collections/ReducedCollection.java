@@ -21,5 +21,5 @@ public class ReducedCollection<T> implements FinalProcessedCollection<T, Optiona
     }
 
     private final BinaryOperator<T> reducer;
-    private Optional<? extends T> element;
+    private Optional<? extends T> element = Optional.empty();
 }

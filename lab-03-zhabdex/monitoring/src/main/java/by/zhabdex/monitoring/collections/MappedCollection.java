@@ -1,6 +1,7 @@
 package by.zhabdex.monitoring.collections;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 public class MappedCollection<T, E> implements ProcessedCollection<T, E> {
@@ -19,6 +20,6 @@ public class MappedCollection<T, E> implements ProcessedCollection<T, E> {
         return elements;
     }
 
-    private Collection<? extends E> elements;
+    private Collection<? extends E> elements = List.of();
     private final Function<? super T, ? extends E> mapper;
 }

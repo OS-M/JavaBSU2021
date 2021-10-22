@@ -12,8 +12,9 @@ public class ReversedCollection<T> implements ProcessedCollection<T, T> {
 
     @Override
     public void renew(Collection<? extends T> elements) {
-        collection = new ArrayList(elements.stream().toList());
-        Collections.reverse(collection);
+        var reversed_elems = new ArrayList<>(elements.stream().toList());
+        Collections.reverse(reversed_elems);
+        collection = reversed_elems;
     }
 
     @Override
@@ -21,5 +22,5 @@ public class ReversedCollection<T> implements ProcessedCollection<T, T> {
         return collection;
     }
 
-    private ArrayList<? extends T> collection;
+    private Collection<? extends T> collection = List.of();
 }

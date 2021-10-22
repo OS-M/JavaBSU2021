@@ -1,6 +1,7 @@
 package by.zhabdex.monitoring.collections;
 
 import java.util.Collection;
+import java.util.List;
 
 public class LimitedCollection<T> implements ProcessedCollection<T, T> {
 
@@ -19,5 +20,5 @@ public class LimitedCollection<T> implements ProcessedCollection<T, T> {
     }
 
     private final long maxSize;
-    private Collection<? extends T> collection;
+    private Collection<? extends T> collection = List.of();
 }

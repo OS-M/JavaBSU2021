@@ -23,10 +23,16 @@ public class Service {
     private int summaryPing = 0;
 
     public long getUptimeSeconds() {
+        if (startedTime == null || currentTime == null) {
+            return 0;
+        }
         return ChronoUnit.SECONDS.between(startedTime, currentTime);
     }
 
     public long getAveragePing() {
+        if (requestsForUptime == 0) {
+            return 0;
+        }
         return summaryPing / requestsForUptime;
     }
 

@@ -1,6 +1,7 @@
 package by.zhabdex.monitoring.collections;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class FilteredCollection<T> implements ProcessedCollection<T, T> {
@@ -20,5 +21,5 @@ public class FilteredCollection<T> implements ProcessedCollection<T, T> {
     }
 
     private final Predicate<? super T> predicate;
-    private Collection<? extends T> collection;
+    private Collection<? extends T> collection = List.of();
 }

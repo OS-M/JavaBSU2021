@@ -2,6 +2,7 @@ package by.zhabdex.monitoring.collections;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Function;
 
 public class SortedCollection<T> implements ProcessedCollection<T, T> {
@@ -32,5 +33,5 @@ public class SortedCollection<T> implements ProcessedCollection<T, T> {
     }
 
     private final Comparator<? super T> comparator;
-    Collection<? extends T> collection;
+    Collection<? extends T> collection = List.of();
 }
