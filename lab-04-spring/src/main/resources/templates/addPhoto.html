@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add photo</title>
+</head>
+<body>
+<h1>Add photo</h1>
+
+<form action="/add_photo" method="post" enctype="multipart/form-data">
+    <label for="img">Select image:</label>
+    <input type="file" id="img" name="img" accept="image/*">
+    <br/>
+    <text text="Photo Set"></text>
+    <select name="photoSetId">
+        <tr th:each="photoSet: ${photoSets}">
+            <option th:value="${photoSet.getId()}"><td th:text="${photoSet.getName()}" /></option>
+        </tr>
+    </select>
+    <br/>
+    <input type="submit" value="Upload">
+</form>
+
+</body>
+</html>

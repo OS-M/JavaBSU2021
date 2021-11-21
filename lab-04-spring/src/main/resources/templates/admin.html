@@ -2,28 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Start Page</title>
+    <title>Admin Page</title>
 </head>
 <body>
 <h1>Admin</h1>
 
-<form action="/add_photo_set" method="post">
-    <label>
-        Name of photo set:
-        <input type="text" name="photoSetName">
-    </label>
-    <br/>
-    <label>
-        Location:
-        <input type="text" name="location">
-    </label>
-    <br/>
-    <label>
-        Date:
-        <input type="date" name="date">
-    </label>
-    <br/>
-    <input type="submit" name="Add photo set">
+<form action="/add_photo_set">
+    <input type="submit" value="Add photo set"/>
+</form>
+<br/>
+<form action="/add_photo">
+    <input type="submit" value="Add photo"/>
 </form>
 
 </body>

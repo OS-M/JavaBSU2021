@@ -24,6 +24,7 @@ public class PhotoSet {
     @GeneratedValue(strategy = IDENTITY)
     Integer id;
     String name;
+    String description;
     String location;
     Date date;
     @OneToMany(mappedBy = "photoSet")

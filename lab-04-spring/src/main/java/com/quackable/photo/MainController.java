@@ -8,13 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -26,38 +31,66 @@ public class MainController {
     PhotoSetRepository photoSetRepository;
 
     @GetMapping("/")
-    String startPage() {
+    String startPage(Model model) {
+        model.addAttribute("photoSets", photoSetRepository.findAll());
         return "index";
+    }
+
+    @GetMapping("/photoSet")
+    String photoSet(Model model, @RequestParam Integer photoSetId) {
+        List<String> photos = new ArrayList<>();
+        var photoSet = photoSetRepository.findById(photoSetId).get();
+        for (var photo : photoSet.getPhotos()) {
+            photos.add(new String(Base64.getEncoder().encode(photo.getPhoto()),
+                    StandardCharsets.UTF_8));
+        }
+        model.addAttribute("photos", photos);
+        model.addAttribute("name", photoSet.getName());
+        model.addAttribute("description", photoSet.getDescription());
+        model.addAttribute("date", photoSet.getDate());
+        return "photoSet";
     }
 
     @GetMapping("/admin")
     String adminPage() {
-//        PhotoSet photoSet = new PhotoSet();
-//        photoSet.setLocation("loc2");
-//        photoSetRepository.save(photoSet);
-//        Photo photo = new Photo();
-//        photo.setPhotoSet(photoSet);
-//        photoRepository.save(photo);
         return "admin";
+    }
+
+    @GetMapping("/add_photo_set")
+    public String addPhotoSetForm() {
+        return "addPhotoSet";
     }
 
     @PostMapping(value = "/add_photo_set", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String addPhotoSet(@RequestParam String photoSetName,
                               @RequestParam String location,
+                              @RequestParam String description,
                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         PhotoSet photoSet = new PhotoSet();
         photoSet.setName(photoSetName);
         photoSet.setLocation(location);
+        photoSet.setDescription(description);
         photoSet.setDate(date);
         photoSetRepository.save(photoSet);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @PostMapping(value = "/add_photo", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String addPhoto(@RequestParam String photoSetName,
-                           @RequestParam String location,
-                           @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+    @GetMapping("/add_photo")
+    public String addPhotoForm(Model model) {
+        model.addAttribute("photoSets", photoSetRepository.findAll());
+        return "addPhoto";
+    }
 
-        return "redirect:/";
+    @PostMapping(value = "/add_photo")
+    public String addPhoto(@RequestParam MultipartFile img,
+                           @RequestParam Integer photoSetId)
+            throws IOException {
+        Photo photo = new Photo();
+        System.out.println(img.getOriginalFilename());
+        System.out.println(photoSetId);
+        photo.setPhoto(img.getBytes());
+        photo.setPhotoSet(photoSetRepository.findById(photoSetId).get());
+        photoRepository.save(photo);
+        return "redirect:/admin";
     }
 }

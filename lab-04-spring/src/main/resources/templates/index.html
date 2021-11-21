@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <title>Start Page</title>
 </head>
+
 <body>
-<h1>Text</h1>
+
+<h1>Photo Sets</h1>
+
+<tr th:each="photoSet: ${photoSets}">
+    <form action="/photoSet">
+        <text th:text="${photoSet.getName()}"></text>
+        <text th:text="${photoSet.getDescription()}"></text>
+        <text th:text="${photoSet.getLocation()}"></text>
+        <text th:text="${photoSet.getDate()}"></text>
+        <input type="submit" value="View"/>
+        <input type="hidden" name="photoSetId" th:value="${photoSet.getId()}"/>
+    </form>
+    <br/>
+</tr>
+
 </body>
 </html>
