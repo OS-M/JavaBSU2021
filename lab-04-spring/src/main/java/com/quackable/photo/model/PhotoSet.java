@@ -1,5 +1,6 @@
 package com.quackable.photo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -27,6 +28,7 @@ public class PhotoSet {
     String description;
     String location;
     Date date;
+    @JsonIgnore
     @OneToMany(mappedBy = "photoSet")
     List<Photo> photos;
 

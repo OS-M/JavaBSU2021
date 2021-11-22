@@ -4,7 +4,9 @@ import com.quackable.photo.model.Photo;
 import com.quackable.photo.model.PhotoSet;
 import com.quackable.photo.repositories.PhotoRepository;
 import com.quackable.photo.repositories.PhotoSetRepository;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -82,7 +84,7 @@ public class MainController {
     }
 
     @PostMapping(value = "/add_photo")
-    public String addPhoto(@RequestParam MultipartFile img,
+    public String addPhoto(@RequestParam @NotNull MultipartFile img,
                            @RequestParam Integer photoSetId)
             throws IOException {
         Photo photo = new Photo();
@@ -92,5 +94,10 @@ public class MainController {
         photo.setPhotoSet(photoSetRepository.findById(photoSetId).get());
         photoRepository.save(photo);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/error")
+    public String errorPage() {
+        return "error";
     }
 }
