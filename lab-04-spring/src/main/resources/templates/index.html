@@ -7,14 +7,16 @@
 
 <body>
 
-<h1>Photo Sets</h1>
+<h1>Photo Set App</h1>
+<h2>Photo Sets</h2>
 
 <tr th:each="photoSet: ${photoSets}">
     <form action="/photoSet">
-        <text th:text="${photoSet.getName()}"></text>
+        <h3 th:text="${photoSet.getName()}"></h3>
         <text th:text="${photoSet.getDescription()}"></text>
         <text th:text="${photoSet.getLocation()}"></text>
         <text th:text="${photoSet.getDate()}"></text>
+        <br/>
         <input type="submit" value="View"/>
         <input type="hidden" name="photoSetId" th:value="${photoSet.getId()}"/>
     </form>

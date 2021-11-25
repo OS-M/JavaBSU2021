@@ -100,4 +100,16 @@ public class MainController {
     public String errorPage() {
         return "error";
     }
+
+    @PostMapping(value = "/removePhoto", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String removePhoto(@RequestParam Integer id) {
+        photoRepository.deleteById(id);
+        return "redirect:/admin";
+    }
+
+    @PostMapping(value = "/removePhotoSet", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String removePhotoSet(@RequestParam Integer id) {
+        photoSetRepository.deleteById(id);
+        return "redirect:/admin";
+    }
 }

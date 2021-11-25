@@ -20,10 +20,13 @@
 <br/>
 
 <h1>
+    <span th:remove="tag">Name: </span>
     <span th:text="${name}" th:remove="tag">title</span>
     <br/>
+    <small>Date: </small>
     <small th:text="${date}" >Subtitle</small>
     <br/>
+    <small>Description: </small>
     <small th:text="${description}" >Subtitle</small>
 </h1>
 
