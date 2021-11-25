@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        img {
+            height: 400px;
+            width: auto;
+            border-style: double;
+            border-color: pink;
+            border-width: 10px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Photo Set</title>
+</head>
+
+<form action="/">
+    <input type="submit" value="Home"/>
+</form>
+<br/>
+
+<h1>
+    <span th:remove="tag">Name: </span>
+    <span th:text="${name}" th:remove="tag">title</span>
+    <br/>
+    <small>Date: </small>
+    <small th:text="${date}" >Subtitle</small>
+    <br/>
+    <small>Description: </small>
+    <small th:text="${description}" >Subtitle</small>
+</h1>
+
+
+<body>
+
+<tr th:each="photo: ${photos}">
+    <img th:src="*{'data:image/jpg;base64,'+ photo}" alt="#"/>
+    <br/>
+</tr>
+
+</body>
+</html>

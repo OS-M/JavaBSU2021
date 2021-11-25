@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+<h1>Admin</h1>
+
+<form action="/">
+    <input type="submit" value="Home"/>
+</form>
+<br/>
+<form action="/add_photo_set">
+    <input type="submit" value="Add photo set"/>
+</form>
+<br/>
+<form action="/add_photo">
+    <input type="submit" value="Add photo"/>
+</form>
+
+<br/>
+<br/>
+
+<form action="/removePhoto" method="POST">
+    <label>
+        Photo Id:
+        <input type="text" name="id">
+    </label>
+    <input type="submit" value="Remove photo"/>
+</form>
+
+<form action="/removePhotoSet" method="POST">
+    <label>
+        Photo Set Id:
+        <input type="text" name="id">
+    </label>
+    <input type="submit" value="Remove photo set"/>
+</form>
+
+</body>
+</html>
