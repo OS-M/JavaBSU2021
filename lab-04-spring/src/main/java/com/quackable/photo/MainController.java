@@ -109,6 +109,7 @@ public class MainController {
 
     @PostMapping(value = "/removePhotoSet", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String removePhotoSet(@RequestParam Integer id) {
+        photoRepository.deleteAll(photoSetRepository.findById(id).get().getPhotos());
         photoSetRepository.deleteById(id);
         return "redirect:/admin";
     }
